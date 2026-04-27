@@ -208,3 +208,4 @@
 /Users/rebekahbumatay/LibTechProject/Libtech.Api/obj/Debug/net10.0/Libtech.Api.pdb
 /Users/rebekahbumatay/LibTechProject/Libtech.Api/obj/Debug/net10.0/Libtech.Api.genruntimeconfig.cache
 /Users/rebekahbumatay/LibTechProject/Libtech.Api/obj/Debug/net10.0/ref/Libtech.Api.dll
+/Users/rebekahbumatay/LibTechProject/Libtech.Api/obj/Debug/net10.0/Libtech.Api.sourcelink.json

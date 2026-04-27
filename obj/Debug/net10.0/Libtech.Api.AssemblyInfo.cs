@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Libtech.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c867a378d72ad943eeeae2a2dec0c6b77bc0b407")]
 [assembly: System.Reflection.AssemblyProductAttribute("Libtech.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Libtech.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

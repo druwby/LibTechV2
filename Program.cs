@@ -29,6 +29,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<LibtechContext>();
+    db.Database.EnsureCreated();
 }
 
 app.UseHttpsRedirection();
