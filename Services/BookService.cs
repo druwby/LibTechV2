@@ -30,7 +30,8 @@ public class BookService : IBookService {
     }
 
     public async Task<BookResponseDTO> CreateBookAsync(BookRequestDTO req) {
-        var book = new Book { Title = req.Title, Author = req.Author, ISBN = req.ISBN, TotalCopies = req.TotalCopies, AvailableCopies = req.TotalCopies };
+        // Updated: AvailableCopies now comes from request instead of defaulting to TotalCopies
+        var book = new Book { Title = req.Title, Author = req.Author, ISBN = req.ISBN, TotalCopies = req.TotalCopies, AvailableCopies = req.AvailableCopies };
         await _repo.AddAsync(book);
         await _repo.SaveChangesAsync();
         _cache.Remove(CACHE_KEY);
@@ -41,6 +42,11 @@ public class BookService : IBookService {
         var book = await _repo.GetByIdAsync(id);
         if (book == null) throw new KeyNotFoundException();
         book.Title = req.Title;
+        // Updated: now updates all fields, not just Title
+        book.Author = req.Author;
+        book.ISBN = req.ISBN;
+        book.TotalCopies = req.TotalCopies;
+        book.AvailableCopies = req.AvailableCopies;
         await _repo.UpdateAsync(book);
         await _repo.SaveChangesAsync();
         _cache.Remove(CACHE_KEY);

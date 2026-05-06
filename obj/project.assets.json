@@ -3770,19 +3770,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/rebekahbumatay/.nuget/packages/": {}
+    "/root/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rebekahbumatay/LibTechProject/Libtech.Api/Libtech.Api.csproj",
+      "projectUniqueName": "/workspace/CPSC-449-LibTech/Libtech.Api.csproj",
       "projectName": "Libtech.Api",
-      "projectPath": "/Users/rebekahbumatay/LibTechProject/Libtech.Api/Libtech.Api.csproj",
-      "packagesPath": "/Users/rebekahbumatay/.nuget/packages/",
-      "outputPath": "/Users/rebekahbumatay/LibTechProject/Libtech.Api/obj/",
+      "projectPath": "/workspace/CPSC-449-LibTech/Libtech.Api.csproj",
+      "packagesPath": "/root/.nuget/packages/",
+      "outputPath": "/workspace/CPSC-449-LibTech/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/rebekahbumatay/.nuget/NuGet/NuGet.Config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -3806,7 +3806,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net10.0": {
@@ -3858,7 +3858,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.202/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
