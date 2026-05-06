@@ -28,4 +28,36 @@ public class MemberService : IMemberService
         await _repository.SaveChangesAsync();
         return new MemberResponseDTO { Id = member.Id, FullName = member.FullName };
     }
+
+    // Added: Get member by ID
+    public async Task<MemberResponseDTO?> GetMemberByIdAsync(int id)
+    {
+        var member = await _repository.GetByIdAsync(id);
+        if (member == null) return null;
+        return new MemberResponseDTO 
+        { 
+            Id = member.Id, 
+            FullName = member.FullName, 
+            Email = member.Email, 
+            MembershipDate = member.MembershipDate 
+        };
+    }
+
+    // Added: Update member
+    public async Task UpdateMemberAsync(int id, MemberRequestDTO request)
+    {
+        var member = await _repository.GetByIdAsync(id);
+        if (member == null) throw new KeyNotFoundException();
+        member.FullName = request.FullName;
+        member.Email = request.Email;
+        await _repository.UpdateAsync(member);
+        await _repository.SaveChangesAsync();
+    }
+
+    // Added: Delete member
+    public async Task DeleteMemberAsync(int id)
+    {
+        await _repository.DeleteAsync(id);
+        await _repository.SaveChangesAsync();
+    }
 }
