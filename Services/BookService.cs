@@ -69,5 +69,5 @@ public class BookService : IBookService {
         _cache.Remove(CACHE_KEY);
     }
 
-    private BookResponseDTO MapToDTO(Book b) => new() { Id = b.Id, Title = b.Title, Author = b.Author, ISBN = b.ISBN, AvailableCopies = b.AvailableCopies };
+    private BookResponseDTO MapToDTO(Book b) => new() { Id = b.Id, Title = b.Title, Author = b.Author, ISBN = b.ISBN, TotalCopies = b.TotalCopies, AvailableCopies = b.AvailableCopies };
 }
