@@ -19,4 +19,29 @@ public class BorrowController : ControllerBase {
             return BadRequest(new { error = ex.Message });
         }
     }
+
+    // Added: POST endpoint to return a book
+    [HttpPost("return")]
+    public async Task<IActionResult> Return([FromBody] BorrowRequestDTO req) {
+        try {
+            await _service.ReturnBookAsync(req.BookId, req.MemberId);
+            return Ok(new { message = "Book returned successfully." });
+        } catch (Exception ex) {
+            return BadRequest(new { error = ex.Message });
+        }
+    }
+
+    // Added: GET endpoint to view all borrow records
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<BorrowResponseDTO>>> GetAllBorrowRecords() {
+        var records = await _service.GetAllBorrowRecordsAsync();
+        return Ok(records);
+    }
+
+    // Added: GET endpoint to view borrow history for a specific member
+    [HttpGet("member/{memberId}")]
+    public async Task<ActionResult<IEnumerable<BorrowResponseDTO>>> GetMemberHistory(int memberId) {
+        var records = await _service.GetMemberBorrowHistoryAsync(memberId);
+        return Ok(records);
+    }
 }

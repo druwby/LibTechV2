@@ -30,6 +30,11 @@ public class BookService : IBookService {
     }
 
     public async Task<BookResponseDTO> CreateBookAsync(BookRequestDTO req) {
+        // Added: Check for duplicate ISBN before creating
+        var existingBook = (await _repo.GetAllAsync()).FirstOrDefault(b => b.ISBN == req.ISBN);
+        if (existingBook != null)
+            throw new InvalidOperationException($"A book with ISBN '{req.ISBN}' already exists.");
+
         // Updated: AvailableCopies now comes from request instead of defaulting to TotalCopies
         var book = new Book { Title = req.Title, Author = req.Author, ISBN = req.ISBN, TotalCopies = req.TotalCopies, AvailableCopies = req.AvailableCopies };
         await _repo.AddAsync(book);
@@ -41,6 +46,12 @@ public class BookService : IBookService {
     public async Task UpdateBookAsync(int id, BookRequestDTO req) {
         var book = await _repo.GetByIdAsync(id);
         if (book == null) throw new KeyNotFoundException();
+        
+        // Added: Check for duplicate ISBN when updating (excluding current book)
+        var existingBook = (await _repo.GetAllAsync()).FirstOrDefault(b => b.ISBN == req.ISBN && b.Id != id);
+        if (existingBook != null)
+            throw new InvalidOperationException($"A book with ISBN '{req.ISBN}' already exists.");
+        
         book.Title = req.Title;
         // Updated: now updates all fields, not just Title
         book.Author = req.Author;

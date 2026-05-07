@@ -14,6 +14,8 @@ public class LibtechContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Book>().Property(b => b.ISBN).IsRequired();
+        // Added: Unique constraint on ISBN to prevent duplicate books
+        modelBuilder.Entity<Book>().HasIndex(b => b.ISBN).IsUnique();
         modelBuilder.Entity<Member>().Property(m => m.Email).IsRequired();
     }
 }

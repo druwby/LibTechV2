@@ -19,6 +19,11 @@ public class BorrowService : IBorrowService {
         if (book == null || book.AvailableCopies <= 0) 
             throw new InvalidOperationException("Book is unavailable.");
 
+        // Added: Prevent duplicate borrowing without returning
+        var existingBorrow = await _borrowRepo.GetActiveRecordAsync(req.BookId, req.MemberId);
+        if (existingBorrow != null)
+            throw new InvalidOperationException("Member has already borrowed this book and has not returned it.");
+
         book.AvailableCopies--;
         var record = new BorrowRecord { BookId = req.BookId, MemberId = req.MemberId, Status = "Borrowed" };
         
@@ -38,5 +43,29 @@ public class BorrowService : IBorrowService {
         record.Status = "Returned";
         record.ReturnDate = DateTime.UtcNow;
         await _bookRepo.SaveChangesAsync();
+    }
+
+    // Added: Get all borrow records
+    public async Task<IEnumerable<BorrowResponseDTO>> GetAllBorrowRecordsAsync() {
+        var records = await _borrowRepo.GetAllRecordsAsync();
+        return records.Select(r => new BorrowResponseDTO {
+            Id = r.Id,
+            BookId = r.BookId,
+            MemberId = r.MemberId,
+            BorrowDate = r.BorrowDate,
+            Status = r.Status
+        });
+    }
+
+    // Added: Get borrow history for a specific member
+    public async Task<IEnumerable<BorrowResponseDTO>> GetMemberBorrowHistoryAsync(int memberId) {
+        var records = await _borrowRepo.GetMemberHistoryAsync(memberId);
+        return records.Select(r => new BorrowResponseDTO {
+            Id = r.Id,
+            BookId = r.BookId,
+            MemberId = r.MemberId,
+            BorrowDate = r.BorrowDate,
+            Status = r.Status
+        });
     }
 }
